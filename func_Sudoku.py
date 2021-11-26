@@ -120,6 +120,31 @@ def SudokuPolymorphSolver(S):
                 break
     return (np.argmax(Q, axis = 2) + 1).astype(int) if np.max(np.sum(Q, axis = 2)) == 1 else np.zeros((9,9), dtype = int)
 
+def AnswerFilter(S):
+    """Prints the solution for the Sudoku problem.
+       >>> AnswerFilter(np.zeros((9,9), dtype = int))
+       Polymorphism doesn't exist
+       >>> AnswerFilter(0)
+       Traceback (most recent call last):
+        ...
+       TypeError: S must be numpy array
+       >>> AnswerFilter(np.zeros((9,9)))
+       Traceback (most recent call last):
+        ...
+       TypeError: wrong type of elements
+       >>> AnswerFilter(np.zeros((4,9), dtype = int))
+       Traceback (most recent call last):
+        ...
+       ValueError: wrong shape of S
+    """
+    if type(S) != np.ndarray:
+        raise TypeError( "S must be numpy array" )
+    if S.dtype != 'int':
+        raise TypeError( "wrong type of elements" )
+    if S.shape != (9,9):
+        raise ValueError( "wrong shape of S" )
+    print(S if np.sum(S) != 0 else "Polymorphism doesn't exist")
+
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
