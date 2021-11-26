@@ -106,6 +106,8 @@ def SudokuPolymorphSolver(S):
     Q = np.array([[np.where(np.arange(1,10) != S[i][j],np.zeros((9,)),np.ones((9,)))
     if S[i][j] != 0 else np.ones((9,)) for j in range(9)] for i in range(9)]).astype(int)
     Q, G = CSP2(Q, G)
+    if np.sum(Q) == 0:
+        return np.zeros((9,9), dtype = int) - 1
     while np.max(np.sum(Q, axis = 2)) > 1:
         I = np.unravel_index(np.argmax(np.sum(Q, axis = 2), axis = None), np.sum(Q, axis = 2).shape)
         P = np.array([Q[I]])[0]
@@ -143,7 +145,12 @@ def AnswerFilter(S):
         raise TypeError( "wrong type of elements" )
     if S.shape != (9,9):
         raise ValueError( "wrong shape of S" )
-    print(S if np.sum(S) != 0 else "Polymorphism doesn't exist")
+    if np.sum(S) > 0:
+        print(S)
+    elif np.sum(S) == 0:
+        print("Polymorphism doesn't exist")
+    else:
+        print("Problem can't be solved")
 
 if __name__ == "__main__":
     import doctest
