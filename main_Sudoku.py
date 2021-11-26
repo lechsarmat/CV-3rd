@@ -1,18 +1,8 @@
-import numpy as np
+import pandas as pd
 import func_Sudoku as su
 
-S1 = np.array([
-    [5, 3, 0,    0, 7, 0,    0, 0, 0],
-    [6, 0, 0,    1, 9, 5,    0, 0, 0],
-    [0, 9, 8,    0, 0, 0,    0, 6, 0],
+S1_df = pd.read_csv( "data/h3_S1.csv" )
+S1 = su.DataToMatrix(S1_df).astype(int)
 
-    [8, 0, 0,    0, 6, 0,    0, 0, 3],
-    [4, 0, 0,    8, 0, 3,    0, 0, 1],
-    [7, 0, 0,    0, 2, 0,    0, 0, 6],
-
-    [0, 6, 0,    0, 0, 0,    2, 8, 0],
-    [0, 0, 0,    4, 1, 9,    0, 0, 5],
-    [0, 0, 0,    0, 8, 0,    0, 7, 9]
-])
-
+print('\nResult:\n')
 print(su.SudokuPolymorphSolver(S1))

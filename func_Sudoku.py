@@ -1,4 +1,18 @@
 import numpy as np
+import pandas as pd
+
+def DataToMatrix(df):
+    """Converts pandas dataframe into numpy array.
+       >>> DataToMatrix(pd.read_csv( "data/h3_S0.csv" ))[0][0]
+       0
+       >>> DataToMatrix(0)
+       Traceback (most recent call last):
+        ...
+       TypeError: df must be pandas dataframe
+    """
+    if not isinstance( df, pd.DataFrame ):
+        raise TypeError( "df must be pandas dataframe" )
+    return df.to_numpy()
 
 def CSP2(Q, G):
     """Implements Arc-Consistency algorithm for the Sudoku problem.
